@@ -16,26 +16,25 @@ class _CalendarGridPageState extends State<CalendarGridPage> {
         title: Text('Grid calendar'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Container(
             child: Text(
-              'Mes',
+              'January',
               style: Theme.of(context).textTheme.display1,
             ),
           ),
-          Container(
-            child: CalendarGrid(
-              year: 2020,
-              month: 1,
+          Center(
+            child: Container(
+              padding: EdgeInsets.all(16),
+              width: 200,
+              color: Colors.blueGrey.shade100,
+              child: CalendarGrid(
+                year: 2020,
+                month: 1,
+              ),
             ),
           ),
-          Divider(),
-          RaisedButton(
-            child: Text('Back'),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          )
         ],
       ),
     );

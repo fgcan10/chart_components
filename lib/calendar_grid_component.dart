@@ -53,33 +53,48 @@ class CalendarGrid extends StatelessWidget {
     int dayofweek = DateTime(year, month, dayOfMonth).weekday;
     List<Widget> ret = [];
     for (int i = 1; i < dayofweek; i++) {
-      ret.add(Container(
-        height: dailyItemSize,
-        width: dailyItemSize,
-        margin: EdgeInsets.all(4),
-      ));
+      ret.add(_getEmtpyGridItem());
     }
     return ret;
+  }
+
+  Widget _getEmtpyGridItem() {
+    return Container(
+      height: dailyItemSize,
+      width: dailyItemSize,
+      margin: EdgeInsets.all(4),
+    );
   }
 
   List<Widget> _generateWeekContainers(int dayOfMonth, BuildContext context) {
     List<Widget> ret = [];
     DateTime newDay = DateTime(year, month, dayOfMonth);
     DateTime thismoment = DateTime.now();
-    int dayofweek = newDay.weekday;
-    for (int i = dayofweek; i < 8 && dayOfMonth < 32; i++) {
-      ret.add(Container(
-        child: _getContainerOfDay(newDay, context),
-        color: (i > 5 && newDay.isBefore(thismoment))
-            ? Colors.grey.shade400
-            : null,
-      ));
+
+    int maxday = _lastDayOfTheMonth(newDay.month);
+    for (int i = newDay.weekday; i < 8; i++) {
+      if (newDay.day <= maxday && newDay.month == month) {
+        ret.add(Container(
+          child: _getDayGridItem(newDay, context),
+          color: (i > 5 && newDay.isBefore(thismoment))
+              ? Colors.grey.shade400
+              : null,
+        ));
+      } else {
+        ret.add(_getEmtpyGridItem());
+      }
       newDay = newDay.add(const Duration(days: 1));
     }
     return ret;
   }
 
-  Widget _getContainerOfDay(DateTime newDay, BuildContext context) {
+  int _lastDayOfTheMonth(int day) {
+    DateTime dt =
+        DateTime(month == 12 ? year + 1 : year, month == 12 ? 1 : month + 1, 0);
+    return dt.day;
+  }
+
+  Widget _getDayGridItem(DateTime newDay, BuildContext context) {
     return Container(
       margin: EdgeInsets.all(4),
       height: dailyItemSize,
