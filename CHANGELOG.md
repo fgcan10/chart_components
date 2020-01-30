@@ -1,3 +1,3 @@
-## [0.0.1] - TODO: Add release date.
+## [0.0.1] - 2020-01-30
 
-* TODO: Describe initial release.
+* An animated bar chart for Flutter. Easy to implement and customize.
