@@ -1,6 +1,6 @@
-# chart_components
+# Chart_Ccomponents
 
-A new Flutter package project.
+An animated bar chart for Flutter. Easy to implement and customize.
 
 ## Getting Started
 
