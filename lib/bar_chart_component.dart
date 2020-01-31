@@ -19,7 +19,7 @@ class BarChart extends StatelessWidget {
 
   BarChart(
       {this.labels = const [],
-      this.data,
+      @required this.data,
       this.reverse = false,
       this.dislplayValue = true,
       this.getColor,
