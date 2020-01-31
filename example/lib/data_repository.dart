@@ -1,37 +1,37 @@
 import 'package:flutter/material.dart';
 
 class DataRepository {
-  static List<int> getData() {
-    List<int> ret = [
-      20,
-      0,
-      100,
-      50,
-      70,
-      20,
-      40,
-      60,
-      10,
-      200,
-      30,
-      50,
-      200,
-      10,
-      120,
-      90,
-      20,
-      12,
-      56,
-      78,
-      23,
-      15,
-      78,
-      2,
-      12,
-      66,
-    ];
+  static List<int> data = [
+    20,
+    0,
+    100,
+    50,
+    70,
+    20,
+    40,
+    60,
+    10,
+    200,
+    30,
+    50,
+    200,
+    10,
+    120,
+    90,
+    20,
+    12,
+    56,
+    78,
+    23,
+    15,
+    78,
+    2,
+    12,
+    66,
+  ];
 
-    return ret;
+  static List<int> getData() {
+    return data;
   }
 
   static List<String> getLabels() {
@@ -47,6 +47,13 @@ class DataRepository {
       return Colors.yellow;
     } else
       return Colors.green;
+  }
+
+  static Color getDayColor(int day) {
+    if (day < data.length) {
+      return getColor(data[day]);
+    } else
+      return Colors.indigo.shade100;
   }
 
   static Icon getIcon(int value) {

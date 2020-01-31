@@ -1,5 +1,7 @@
+import 'package:example/bar_chart_page.dart';
+import 'package:example/calendar_grid_page.dart';
 import 'package:flutter/material.dart';
-import 'home_page.dart';
+import 'package:example/home_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,7 +13,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      initialRoute: HomePage.ID,
+      routes: {
+        HomePage.ID: (context) => HomePage(),
+        BarChartPage.ID: (context) => BarChartPage(),
+        CalendarGridPage.ID: (context) => CalendarGridPage(),
+      },
     );
   }
 }

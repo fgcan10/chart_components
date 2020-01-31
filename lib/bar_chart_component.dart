@@ -1,5 +1,3 @@
-library chart_components;
-
 import 'package:flutter/material.dart';
 
 typedef BarCharGetColor = Color Function(int value);
@@ -19,7 +17,7 @@ class BarChart extends StatelessWidget {
 
   BarChart(
       {this.labels = const [],
-      this.data,
+      @required this.data,
       this.reverse = false,
       this.dislplayValue = true,
       this.getColor,
