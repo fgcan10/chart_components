@@ -59,19 +59,19 @@ class DataRepository {
   static Icon getIcon(int value) {
     if (value < 50) {
       return Icon(
-        Icons.thumb_down,
+        Icons.sentiment_dissatisfied,
         size: 16,
         color: getColor(value),
       );
     } else if (value < 100) {
       return Icon(
-        Icons.bluetooth_audio,
+        Icons.sentiment_satisfied,
         size: 16,
         color: getColor(value),
       );
     } else
       return Icon(
-        Icons.thumb_up,
+        Icons.sentiment_very_satisfied,
         size: 16,
         color: getColor(value),
       );
