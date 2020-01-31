@@ -1,5 +1,3 @@
-library chart_components;
-
 import 'package:flutter/material.dart';
 
 typedef BarCharGetColor = Color Function(int value);

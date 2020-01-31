@@ -1,5 +1,3 @@
-library chart_components;
-
 import 'package:flutter/material.dart';
 
 typedef CalendarGridGetColorItem = Color Function(int dayOfMonth);
@@ -9,14 +7,25 @@ class CalendarGrid extends StatelessWidget {
   final int month;
   final double dailyItemSize;
   final CalendarGridGetColorItem getColorOfDay;
+  final double boderRadiusItem;
+  final double marginItem;
+  final Color backgroundColorWeekend;
+  final int animationDuration;
+  final Curve animationCurve;
 
   CalendarGrid({
-    this.year,
-    this.month,
+    @required this.year,
+    @required this.month,
     this.dailyItemSize = 16.0,
-    this.getColorOfDay,
+    this.boderRadiusItem = 2.0,
+    this.marginItem = 4.0,
+    this.backgroundColorWeekend = Colors.grey,
+    this.animationDuration = 1500,
+    this.animationCurve = Curves.linear,
+    @required this.getColorOfDay,
   })  : assert(year != null),
-        assert(month != null);
+        assert(month != null),
+        assert(getColorOfDay != null);
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +71,7 @@ class CalendarGrid extends StatelessWidget {
     return Container(
       height: dailyItemSize,
       width: dailyItemSize,
-      margin: EdgeInsets.all(4),
+      margin: EdgeInsets.all(marginItem),
     );
   }
 
@@ -77,7 +86,7 @@ class CalendarGrid extends StatelessWidget {
         ret.add(Container(
           child: _getDayGridItem(newDay, context),
           color: (i > 5 && newDay.isBefore(thismoment))
-              ? Colors.grey.shade400
+              ? backgroundColorWeekend
               : null,
         ));
       } else {
@@ -95,12 +104,14 @@ class CalendarGrid extends StatelessWidget {
   }
 
   Widget _getDayGridItem(DateTime newDay, BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(4),
+    return AnimatedContainer(
+      duration: Duration(milliseconds: animationDuration),
+      curve: animationCurve,
+      margin: EdgeInsets.all(marginItem),
       height: dailyItemSize,
       width: dailyItemSize,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(2),
+        borderRadius: BorderRadius.circular(boderRadiusItem),
         color: getColorOfDay == null
             ? Theme.of(context).primaryColor
             : getColorOfDay(newDay.day),

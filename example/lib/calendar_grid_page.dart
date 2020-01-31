@@ -1,4 +1,5 @@
 import 'package:chart_components/calendar_grid_component.dart';
+import 'package:example/data_repository.dart';
 import 'package:flutter/material.dart';
 
 class CalendarGridPage extends StatefulWidget {
@@ -32,6 +33,7 @@ class _CalendarGridPageState extends State<CalendarGridPage> {
               child: CalendarGrid(
                 year: 2020,
                 month: 1,
+                getColorOfDay: DataRepository.getDayColor,
               ),
             ),
           ),

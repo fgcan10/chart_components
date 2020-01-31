@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'data_repository.dart';
-import 'package:chart_components/bar_char_component.dart';
+import 'package:chart_components/bar_chart_component.dart';
 
 class BarChartPage extends StatefulWidget {
   static const String ID = 'barchartpage';
