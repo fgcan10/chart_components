@@ -1,6 +1,7 @@
-# Chart_Ccomponents
+# Chart_Components
 
-An animated bar chart for Flutter. Easy to implement and customize.
+* Animated bar chart for Flutter. Easy to implement and customize.
+* Animated calendar grid for Flutter. 
 
 ## Getting Started
 
