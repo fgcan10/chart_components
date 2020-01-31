@@ -50,10 +50,10 @@ class DataRepository {
   }
 
   static Color getDayColor(int day) {
-    if (data.length < day) {
+    if (day < data.length) {
       return getColor(data[day]);
     } else
-      return null;
+      return Colors.indigo.shade100;
   }
 
   static Icon getIcon(int value) {
