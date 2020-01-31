@@ -69,6 +69,7 @@ class BarChart extends StatelessWidget {
                 width: barWidth,
                 child: Text(
                   hideValue || !dislplayValue ? '' : data[index].toString(),
+                  textAlign: TextAlign.center,
                   softWrap: false,
                   style: Theme.of(context).textTheme.caption,
                 ),
