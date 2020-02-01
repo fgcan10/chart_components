@@ -40,8 +40,8 @@ class _BarChartPageState extends State<BarChartPage> {
             SizedBox(
               height: 32,
             ),
-            SizedBox(
-              height: 300,
+            Expanded(
+              flex: 5,
               child: BarChart(
                 data: data,
                 labels: labels,

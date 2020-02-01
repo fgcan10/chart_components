@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
-typedef BarCharGetColor = Color Function(int value);
-typedef BarCharGetIcon = Icon Function(int value);
+import 'bar_chart_item_component.dart';
 
 class BarChart extends StatelessWidget {
   final List<int> data;
@@ -52,6 +50,15 @@ class BarChart extends StatelessWidget {
   }
 
   Widget _getBarItem(BuildContext context, int index, bool hideValue) {
+    return BarItem(
+      width: 32,
+      value: data[index],
+      heightFactor: data[index] / 200,
+      duration: Duration(milliseconds: 1500),
+      getColor: getColor,
+      getIcon: getIcon,
+    );
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
