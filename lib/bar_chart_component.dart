@@ -53,57 +53,51 @@ class BarChart extends StatelessWidget {
 
   Widget _getBarItem(BuildContext context, int index, bool hideValue) {
     return Container(
-      child: Stack(
-        alignment: AlignmentDirectional.bottomEnd,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              SizedBox(
-                width: barWidth,
-                child: this.getIcon == null || hideValue
-                    ? null
-                    : getIcon(data[index]),
+          SizedBox(
+            width: barWidth,
+            child:
+                this.getIcon == null || hideValue ? null : getIcon(data[index]),
+          ),
+          SizedBox(
+            width: barWidth,
+            child: Text(
+              hideValue || !dislplayValue ? '' : data[index].toString(),
+              textAlign: TextAlign.center,
+              softWrap: false,
+              style: Theme.of(context).textTheme.caption,
+            ),
+          ),
+          AnimatedContainer(
+            curve: animationCurve,
+            duration: Duration(milliseconds: animationDuration),
+            height: data[index].toDouble(),
+            child: SizedBox.fromSize(
+              size: Size(barWidth, data[index].toDouble()),
+              child: Container(
+                decoration: BoxDecoration(
+                    color: this.getColor == null
+                        ? Theme.of(context).primaryColor
+                        : getColor(data[index]),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10))),
               ),
-              SizedBox(
-                width: barWidth,
-                child: Text(
-                  hideValue || !dislplayValue ? '' : data[index].toString(),
-                  textAlign: TextAlign.center,
-                  softWrap: false,
-                  style: Theme.of(context).textTheme.caption,
-                ),
-              ),
-              AnimatedContainer(
-                curve: animationCurve,
-                duration: Duration(milliseconds: animationDuration),
-                height: data[index].toDouble(),
-                child: SizedBox.fromSize(
-                  size: Size(barWidth, data[index].toDouble()),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: this.getColor == null
-                            ? Theme.of(context).primaryColor
-                            : getColor(data[index]),
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10))),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: barWidth,
-                height: labels.length > 0
-                    ? Theme.of(context).textTheme.subhead.height
-                    : 0,
-                child: Text(
-                  labels.length > index ? labels[index] : '',
-                  softWrap: false,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.subhead,
-                ),
-              ),
-            ],
+            ),
+          ),
+          SizedBox(
+            width: barWidth,
+            height: labels.length > 0
+                ? Theme.of(context).textTheme.subhead.height
+                : 0,
+            child: Text(
+              labels.length > index ? labels[index] : '',
+              softWrap: false,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.subhead,
+            ),
           ),
         ],
       ),
