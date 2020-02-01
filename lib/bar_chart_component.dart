@@ -40,7 +40,7 @@ class BarChart extends StatelessWidget {
       reverse: reverse,
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
-        return getBarItem(context,
+        return _getBarItem(context,
             reverse ? (index - data.length + 1) * -1 : index, wasEmpty);
       },
       separatorBuilder: (BuildContext context, int index) {
@@ -51,7 +51,7 @@ class BarChart extends StatelessWidget {
     );
   }
 
-  Widget getBarItem(BuildContext context, int index, bool hideValue) {
+  Widget _getBarItem(BuildContext context, int index, bool hideValue) {
     return Container(
       child: Stack(
         alignment: AlignmentDirectional.bottomEnd,
