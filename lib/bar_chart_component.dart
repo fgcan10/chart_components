@@ -9,7 +9,7 @@ class BarChart extends StatelessWidget {
   final BarCharGetIcon getIcon;
   final double barWidth;
   final double barSeparation;
-  final int animationDuration;
+  final Duration animationDuration;
   final Curve animationCurve;
   final bool reverse;
   final double itemRadius;
@@ -23,10 +23,11 @@ class BarChart extends StatelessWidget {
       this.getIcon,
       this.barWidth = 32,
       this.barSeparation = 10,
-      this.animationDuration = 1500,
+      @required this.animationDuration,
       this.itemRadius = 10,
       this.animationCurve = Curves.easeInOutSine})
-      : assert(data != null);
+      : assert(data != null),
+        assert(animationDuration != null);
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +39,8 @@ class BarChart extends StatelessWidget {
 
     bool showLabels = !(labels.length == 0);
 
+    int maxValue = _getMaxData();
+
     return ListView.separated(
       itemCount: data.length,
       reverse: reverse,
@@ -47,7 +50,8 @@ class BarChart extends StatelessWidget {
             context,
             reverse ? (index - data.length + 1) * -1 : index,
             wasEmpty,
-            showLabels);
+            showLabels,
+            maxValue);
       },
       separatorBuilder: (BuildContext context, int index) {
         return SizedBox(
@@ -62,17 +66,19 @@ class BarChart extends StatelessWidget {
     int index,
     bool hideValue,
     bool showLabels,
+    int maxValue,
   ) {
     return BarItem(
       width: barWidth,
       value: data[index],
       label: labels.length > index ? labels[index] : null,
       showLabels: showLabels,
-      heightFactor: data[index] / 200,
-      duration: Duration(milliseconds: 1500),
+      heightFactor: data[index] / maxValue,
+      duration: animationDuration,
       getColor: getColor,
       getIcon: getIcon,
       radius: itemRadius,
+      hideValue: hideValue,
     );
   }
 
@@ -84,5 +90,13 @@ class BarChart extends StatelessWidget {
     for (int i = 0; i < totalItems; i++) {
       data.add(0);
     }
+  }
+
+  int _getMaxData() {
+    int max = 1;
+    for (var num in data) {
+      if (num > max) max = num;
+    }
+    return max;
   }
 }

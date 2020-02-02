@@ -51,7 +51,7 @@ class _BarChartPageState extends State<BarChartPage> {
                 getIcon: DataRepository.getIcon,
                 barWidth: 42,
                 barSeparation: 12,
-                animationDuration: 1800,
+                animationDuration: Duration(milliseconds: 1800),
                 animationCurve: Curves.easeInOutSine,
                 itemRadius: 30,
               ),
