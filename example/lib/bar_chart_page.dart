@@ -40,8 +40,8 @@ class _BarChartPageState extends State<BarChartPage> {
             SizedBox(
               height: 32,
             ),
-            SizedBox(
-              height: 300,
+            Expanded(
+              flex: 5,
               child: BarChart(
                 data: data,
                 labels: labels,
@@ -49,10 +49,11 @@ class _BarChartPageState extends State<BarChartPage> {
                 reverse: true,
                 getColor: DataRepository.getColor,
                 getIcon: DataRepository.getIcon,
-                barWidth: 20,
-                barSeparation: 6,
-                animationDuration: 1800,
+                barWidth: 42,
+                barSeparation: 12,
+                animationDuration: Duration(milliseconds: 1800),
                 animationCurve: Curves.easeInOutSine,
+                itemRadius: 30,
               ),
             ),
             SizedBox(
