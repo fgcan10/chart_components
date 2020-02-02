@@ -78,16 +78,14 @@ class CalendarGrid extends StatelessWidget {
   List<Widget> _generateWeekContainers(int dayOfMonth, BuildContext context) {
     List<Widget> ret = [];
     DateTime newDay = DateTime(year, month, dayOfMonth);
-    DateTime thismoment = DateTime.now();
+    //DateTime thismoment = DateTime.now();
 
     int maxday = _lastDayOfTheMonth(newDay.month);
     for (int i = newDay.weekday; i < 8; i++) {
       if (newDay.day <= maxday && newDay.month == month) {
         ret.add(Container(
           child: _getDayGridItem(newDay, context),
-          color: (i > 5 && newDay.isBefore(thismoment))
-              ? backgroundColorWeekend
-              : null,
+          color: (i > 5) ? backgroundColorWeekend : null,
         ));
       } else {
         ret.add(_getEmtpyGridItem());
