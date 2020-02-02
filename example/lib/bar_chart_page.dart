@@ -49,10 +49,11 @@ class _BarChartPageState extends State<BarChartPage> {
                 reverse: true,
                 getColor: DataRepository.getColor,
                 getIcon: DataRepository.getIcon,
-                barWidth: 20,
-                barSeparation: 6,
+                barWidth: 42,
+                barSeparation: 12,
                 animationDuration: 1800,
                 animationCurve: Curves.easeInOutSine,
+                itemRadius: 30,
               ),
             ),
             SizedBox(

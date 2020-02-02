@@ -10,8 +10,10 @@ class BarItem extends ImplicitlyAnimatedWidget {
   final double width;
   final int value;
   final String label;
+  final bool showLabels;
   final bool hideValue;
   final bool dislplayValue;
+  final double radius;
 
   const BarItem({
     Key key,
@@ -19,13 +21,20 @@ class BarItem extends ImplicitlyAnimatedWidget {
     @required this.width,
     @required this.value,
     this.label,
+    this.showLabels,
     this.dislplayValue = true,
     this.hideValue = false,
     @required this.getColor,
     this.getIcon,
     Curve curve = Curves.linear,
     @required Duration duration,
-  }) : super(
+    this.radius = 10,
+  })  : assert(heightFactor != null),
+        assert(width != null),
+        assert(value != null),
+        assert(getColor != null),
+        assert(duration != null),
+        super(
           key: key,
           duration: duration,
           curve: curve,
@@ -74,18 +83,22 @@ class _BarItemState extends AnimatedWidgetBaseState<BarItem> {
             child: Container(
               width: widget.width,
               decoration: BoxDecoration(
-                  color: widget.getColor == null
-                      ? Theme.of(context).primaryColor
-                      : widget.getColor(widget.value),
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10))),
+                color: widget.getColor == null
+                    ? Theme.of(context).primaryColor
+                    : widget.getColor(widget.value),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(widget.radius),
+                  topRight: Radius.circular(widget.radius),
+                ),
+              ),
             ),
           ),
         ),
         SizedBox(
           width: widget.width,
-          height: Theme.of(context).textTheme.subhead.height,
+          height: widget.showLabels
+              ? Theme.of(context).textTheme.subhead.height
+              : 0,
           child: Text(
             widget.label == null ? '' : widget.label,
             softWrap: false,
