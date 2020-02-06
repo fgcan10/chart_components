@@ -80,7 +80,7 @@ class CalendarGrid extends StatelessWidget {
     List<Widget> ret = [];
     DateTime newDay = DateTime(year, month, dayOfMonth);
 
-    int maxday = _lastDayOfTheMonth(newDay.month);
+    int maxday = _lastDayOfTheMonth();
     for (int i = newDay.weekday; i < 8; i++) {
       if (newDay.day <= maxday && newDay.month == month) {
         ret.add(Container(
@@ -95,7 +95,7 @@ class CalendarGrid extends StatelessWidget {
     return ret;
   }
 
-  int _lastDayOfTheMonth(int day) {
+  int _lastDayOfTheMonth() {
     DateTime dt =
         DateTime(month == 12 ? year + 1 : year, month == 12 ? 1 : month + 1, 0);
     return dt.day;

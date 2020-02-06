@@ -14,6 +14,9 @@ class BarItem extends ImplicitlyAnimatedWidget {
   final bool hideValue;
   final bool dislplayValue;
   final double radius;
+  final double footerHeight;
+  final double iconHeight;
+  final double headerValueHeight;
 
   const BarItem({
     Key key,
@@ -29,6 +32,9 @@ class BarItem extends ImplicitlyAnimatedWidget {
     Curve curve = Curves.linear,
     @required Duration duration,
     this.radius = 10,
+    this.footerHeight = 32,
+    this.iconHeight = 16,
+    this.headerValueHeight = 16,
   })  : assert(heightFactor != null),
         assert(width != null),
         assert(value != null),
@@ -59,12 +65,14 @@ class _BarItemState extends AnimatedWidgetBaseState<BarItem> {
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         SizedBox(
+          height: widget.iconHeight,
           width: widget.width,
           child: widget.getIcon == null || widget.hideValue
               ? null
               : widget.getIcon(widget.value),
         ),
         SizedBox(
+          height: widget.headerValueHeight,
           width: widget.width,
           child: Text(
             widget.hideValue || !widget.dislplayValue
@@ -96,9 +104,7 @@ class _BarItemState extends AnimatedWidgetBaseState<BarItem> {
         ),
         SizedBox(
           width: widget.width,
-          height: widget.showLabels
-              ? Theme.of(context).textTheme.subhead.height
-              : 0,
+          height: widget.footerHeight,
           child: Text(
             widget.label == null ? '' : widget.label,
             softWrap: false,
