@@ -2,32 +2,32 @@ import 'package:flutter/material.dart';
 
 class DataRepository {
   static List<int> data = [
-    20,
-    0,
-    100,
-    50,
-    70,
-    20,
-    40,
-    60,
-    10,
-    200,
-    30,
-    50,
-    200,
-    10,
-    120,
-    90,
-    20,
-    12,
-    56,
-    78,
-    23,
-    15,
-    78,
     2,
-    12,
-    66,
+    0,
+    1,
+    4,
+    3,
+    2,
+    4,
+    2,
+    1,
+    2,
+    3,
+    1,
+    2,
+    1,
+    1,
+    0,
+    2,
+    1,
+    2,
+    3,
+    4,
+    1,
+    2,
+    3,
+    4,
+    1,
   ];
 
   static List<int> getData() {
@@ -35,7 +35,7 @@ class DataRepository {
   }
 
   static List<String> getLabels() {
-    List<String> labels = ['1', 'holaque'];
+    List<String> labels = ['a'];
 
     return labels;
   }
@@ -57,13 +57,13 @@ class DataRepository {
   }
 
   static Icon getIcon(int value) {
-    if (value < 50) {
+    if (value < 1) {
       return Icon(
         Icons.sentiment_dissatisfied,
         size: 16,
         color: getColor(value),
       );
-    } else if (value < 100) {
+    } else if (value < 2) {
       return Icon(
         Icons.sentiment_satisfied,
         size: 16,
