@@ -31,6 +31,7 @@ class CalendarGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
         ..._generateRows(context),
@@ -78,7 +79,6 @@ class CalendarGrid extends StatelessWidget {
   List<Widget> _generateWeekContainers(int dayOfMonth, BuildContext context) {
     List<Widget> ret = [];
     DateTime newDay = DateTime(year, month, dayOfMonth);
-    //DateTime thismoment = DateTime.now();
 
     int maxday = _lastDayOfTheMonth(newDay.month);
     for (int i = newDay.weekday; i < 8; i++) {
