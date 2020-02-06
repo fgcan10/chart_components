@@ -54,6 +54,7 @@ class _BarChartPageState extends State<BarChartPage> {
                 animationDuration: Duration(milliseconds: 1800),
                 animationCurve: Curves.easeInOutSine,
                 itemRadius: 30,
+                iconHeight: 16,
               ),
             ),
             SizedBox(

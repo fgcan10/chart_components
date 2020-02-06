@@ -38,7 +38,7 @@ class BarChart extends StatelessWidget {
       @required this.animationDuration,
       this.itemRadius = 10,
       this.footerHeight = 32,
-      this.iconHeight = 16,
+      this.iconHeight = 0,
       this.headerValueHeight = 16,
       this.lineGridColor,
       this.animationCurve = Curves.easeInOutSine})
