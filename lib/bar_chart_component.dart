@@ -70,6 +70,10 @@ class BarChart extends StatelessWidget {
   /// Default from theme.
   final Color lineGridColor;
 
+  /// Int labels.
+  /// Default false.
+  final bool roundValuesOnText;
+
   BarChart(
       {this.labels = const [],
       @required this.data,
@@ -85,6 +89,7 @@ class BarChart extends StatelessWidget {
       this.iconHeight = 0,
       this.headerValueHeight = 16,
       this.lineGridColor,
+      this.roundValuesOnText = false,
       this.animationCurve = Curves.easeInOutSine})
       : assert(data != null),
         assert(animationDuration != null);
@@ -176,6 +181,7 @@ class BarChart extends StatelessWidget {
       radius: itemRadius,
       hideValue: hideValue,
       footerHeight: footerHeight,
+      roundValuesOnText: roundValuesOnText,
     );
   }
 
@@ -212,6 +218,7 @@ class _BarItem extends ImplicitlyAnimatedWidget {
   final double footerHeight;
   final double iconHeight;
   final double headerValueHeight;
+  final bool roundValuesOnText;
 
   const _BarItem({
     Key key,
@@ -229,6 +236,7 @@ class _BarItem extends ImplicitlyAnimatedWidget {
     this.radius = 10,
     this.footerHeight = 32,
     this.iconHeight = 16,
+    this.roundValuesOnText = false,
     this.headerValueHeight = 16,
   })  : assert(heightFactor != null),
         assert(width != null),
@@ -272,7 +280,9 @@ class _BarItemState extends AnimatedWidgetBaseState<_BarItem> {
           child: Text(
             widget.hideValue || !widget.dislplayValue
                 ? ''
-                : widget.value.toString(),
+                : (widget.roundValuesOnText
+                    ? widget.value.round().toString()
+                    : widget.value.toString()),
             textAlign: TextAlign.center,
             softWrap: false,
             style: Theme.of(context).textTheme.caption,
