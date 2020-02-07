@@ -34,17 +34,20 @@ class _BarChartPageState extends State<BarChartPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(top: 32),
+              margin: EdgeInsets.only(top: 16),
               child: Text(
                 'Walked km per day',
                 style: Theme.of(context).textTheme.display1,
               ),
             ),
-            SizedBox(
-              height: 32,
+            Expanded(
+              flex: 1,
+              child: SizedBox(
+                height: 16,
+              ),
             ),
             Expanded(
-              flex: 5,
+              flex: 20,
               child: Container(
                 margin: EdgeInsets.all(16),
                 padding: EdgeInsets.only(bottom: 0, left: 8, right: 8, top: 8),
@@ -73,8 +76,11 @@ class _BarChartPageState extends State<BarChartPage> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 16,
+            Expanded(
+              flex: 1,
+              child: SizedBox(
+                height: 16,
+              ),
             ),
             FractionallySizedBox(
               widthFactor: 0.9,
@@ -98,8 +104,11 @@ class _BarChartPageState extends State<BarChartPage> {
                 },
               ),
             ),
-            SizedBox(
-              height: 32,
+            Expanded(
+              flex: 1,
+              child: SizedBox(
+                height: 16,
+              ),
             ),
           ],
         ),
