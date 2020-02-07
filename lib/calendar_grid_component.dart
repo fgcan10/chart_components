@@ -3,29 +3,51 @@ import 'package:flutter/material.dart';
 typedef CalendarGridGetColorItem = Color Function(int dayOfMonth);
 
 class CalendarGrid extends StatelessWidget {
+  /// Year in YYYY notation.
   final int year;
+
+  /// Month of the year.
   final int month;
-  final double dailyItemSize;
-  final CalendarGridGetColorItem getColorOfDay;
+
+  /// Size of the box (day item).
+  /// Default 16.0
+  final double dayItemSize;
+
+  /// Radius of box.
+  /// Default 2.0
   final double boderRadiusItem;
+
+  /// Margin between items.
+  /// Default 4.0
   final double marginItem;
+
+  /// Get color of the box based on the date.
+  final CalendarGridGetColorItem getColorOfDay;
+
+  /// Get background color for the weekend
   final Color backgroundColorWeekend;
-  final int animationDuration;
+
+  /// Duration of the animation applied when color (data underneath) changes.
+  final Duration animationDuration;
+
+  /// Animation curve.
+  /// Default Curves.linear
   final Curve animationCurve;
 
   CalendarGrid({
     @required this.year,
     @required this.month,
-    this.dailyItemSize = 16.0,
+    this.dayItemSize = 16.0,
     this.boderRadiusItem = 2.0,
     this.marginItem = 4.0,
     this.backgroundColorWeekend = Colors.grey,
-    this.animationDuration = 1500,
+    @required this.animationDuration,
     this.animationCurve = Curves.linear,
     @required this.getColorOfDay,
   })  : assert(year != null),
         assert(month != null),
-        assert(getColorOfDay != null);
+        assert(getColorOfDay != null),
+        assert(animationDuration != null);
 
   @override
   Widget build(BuildContext context) {
@@ -70,8 +92,8 @@ class CalendarGrid extends StatelessWidget {
 
   Widget _getEmtpyGridItem() {
     return Container(
-      height: dailyItemSize,
-      width: dailyItemSize,
+      height: dayItemSize,
+      width: dayItemSize,
       margin: EdgeInsets.all(marginItem),
     );
   }
@@ -103,11 +125,11 @@ class CalendarGrid extends StatelessWidget {
 
   Widget _getDayGridItem(DateTime newDay, BuildContext context) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: animationDuration),
+      duration: animationDuration,
       curve: animationCurve,
       margin: EdgeInsets.all(marginItem),
-      height: dailyItemSize,
-      width: dailyItemSize,
+      height: dayItemSize,
+      width: dayItemSize,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(boderRadiusItem),
         color: getColorOfDay == null

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'data_repository.dart';
 import 'package:chart_components/bar_chart_component.dart';
@@ -13,7 +15,7 @@ class _BarChartPageState extends State<BarChartPage> {
   List<double> emptyData = [];
   List<double> data;
   List<String> labels = [];
-  bool startDrawing = true;
+  bool loaded = false;
 
   @override
   void initState() {
@@ -25,15 +27,16 @@ class _BarChartPageState extends State<BarChartPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Test barchart'),
+        title: Text('Bar chart example'),
       ),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Container(
+              margin: EdgeInsets.only(top: 32),
               child: Text(
-                'Data',
+                'Walked km per day',
                 style: Theme.of(context).textTheme.display1,
               ),
             ),
@@ -42,46 +45,61 @@ class _BarChartPageState extends State<BarChartPage> {
             ),
             Expanded(
               flex: 5,
-              child: BarChart(
-                data: data,
-                labels: labels,
-                dislplayValue: true,
-                reverse: true,
-                getColor: DataRepository.getColor,
-                getIcon: DataRepository.getIcon,
-                barWidth: 42,
-                barSeparation: 12,
-                animationDuration: Duration(milliseconds: 1800),
-                animationCurve: Curves.easeInOutSine,
-                itemRadius: 30,
-                iconHeight: 16,
-                roundValuesOnText: true,
+              child: Container(
+                margin: EdgeInsets.all(16),
+                padding: EdgeInsets.only(bottom: 0, left: 8, right: 8, top: 8),
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  border: Border.all(color: Theme.of(context).primaryColor),
+                ),
+                child: BarChart(
+                  data: data,
+                  labels: labels,
+                  dislplayValue: true,
+                  reverse: true,
+                  getColor: DataRepository.getColor,
+                  getIcon: DataRepository.getIcon,
+                  barWidth: 42,
+                  barSeparation: 12,
+                  animationDuration: Duration(milliseconds: 1800),
+                  animationCurve: Curves.easeInOutSine,
+                  itemRadius: 30,
+                  iconHeight: 24,
+                  footerHeight: 24,
+                  headerValueHeight: 16,
+                  roundValuesOnText: false,
+                  lineGridColor: Colors.lightBlue,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            FractionallySizedBox(
+              widthFactor: 0.9,
+              child: RaisedButton(
+                color: Theme.of(context).primaryColor,
+                child: Text(
+                  'Refresh data',
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                ),
+                onPressed: () {
+                  setState(() {
+                    if (!loaded) {
+                      data = DataRepository.getData();
+                      loaded = true;
+                    } else {
+                      data[data.length - 1] =
+                          (Random().nextDouble() * 700).round() / 100;
+                    }
+                    labels = DataRepository.getLabels();
+                  });
+                },
               ),
             ),
             SizedBox(
               height: 32,
-            ),
-            ButtonBar(
-              alignment: MainAxisAlignment.center,
-              children: <Widget>[
-                RaisedButton(
-                    child: Text('Load data'),
-                    onPressed: () {
-                      setState(() {
-                        data = DataRepository.getData();
-                        labels = DataRepository.getLabels();
-                      });
-                    }),
-                RaisedButton(
-                  child: Text('Clear data'),
-                  onPressed: () {
-                    setState(() {
-                      data = [];
-                      labels = [];
-                    });
-                  },
-                )
-              ],
             ),
           ],
         ),

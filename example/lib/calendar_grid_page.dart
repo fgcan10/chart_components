@@ -34,6 +34,7 @@ class _CalendarGridPageState extends State<CalendarGridPage> {
                 year: 2020,
                 month: 1,
                 getColorOfDay: DataRepository.getDayColor,
+                animationDuration: Duration(milliseconds: 1500),
               ),
             ),
           ),

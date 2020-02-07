@@ -115,28 +115,28 @@ class BarChart extends StatelessWidget {
           id: _Slot.baseline,
           child: Divider(
             color: lineGridColor,
-            thickness: 0.5,
+            thickness: 1,
           ),
         ),
         LayoutId(
           id: _Slot.divider14,
           child: Divider(
             color: lineGridColor,
-            thickness: 0.5,
+            thickness: 0.8,
           ),
         ),
         LayoutId(
           id: _Slot.divider24,
           child: Divider(
             color: lineGridColor,
-            thickness: 0.5,
+            thickness: 0.8,
           ),
         ),
         LayoutId(
           id: _Slot.divider34,
           child: Divider(
             color: lineGridColor,
-            thickness: 0.5,
+            thickness: 0.8,
           ),
         ),
         LayoutId(
@@ -182,6 +182,8 @@ class BarChart extends StatelessWidget {
       hideValue: hideValue,
       footerHeight: footerHeight,
       roundValuesOnText: roundValuesOnText,
+      iconHeight: iconHeight,
+      headerValueHeight: headerValueHeight,
     );
   }
 
