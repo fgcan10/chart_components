@@ -10,8 +10,8 @@ class BarChartPage extends StatefulWidget {
 }
 
 class _BarChartPageState extends State<BarChartPage> {
-  List<int> emptyData = [];
-  List<int> data;
+  List<double> emptyData = [];
+  List<double> data;
   List<String> labels = [];
   bool startDrawing = true;
 

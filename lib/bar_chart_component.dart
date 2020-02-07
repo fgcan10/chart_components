@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'bar_chart_item_component.dart';
 
 enum _Slot {
   chart,
@@ -9,21 +8,66 @@ enum _Slot {
   divider34,
 }
 
+typedef BarCharGetColor = Color Function(double value);
+typedef BarCharGetIcon = Icon Function(double value);
+
+/// Bar chart component. Horizontally scrollable.
+/// Items can show the value and an icon on top, and a label on the footer.
 class BarChart extends StatelessWidget {
-  final List<int> data;
+  /// Source data.
+  final List<double> data;
+
+  /// Labels to display under the bars.
   final List<String> labels;
+
+  /// If enabled isplays the value on top of the bar.
   final bool dislplayValue;
+
+  /// Gets the color of the bar based on the bar value.
   final BarCharGetColor getColor;
+
+  /// Gets the icon to be displayed on top based on the bar value.
   final BarCharGetIcon getIcon;
-  final double barWidth;
-  final double barSeparation;
-  final Duration animationDuration;
-  final Curve animationCurve;
-  final bool reverse;
+
+  /// Radius for the top of the bar.
+  /// Default 10
   final double itemRadius;
+
+  /// Bar's width.
+  /// Default 32.
+  final double barWidth;
+
+  /// Distance between bars.
+  /// Default 12.
+  final double barSeparation;
+
+  /// Duration of the bar's grow animation.
+  final Duration animationDuration;
+
+  /// Animation curve to use.
+  /// Default Curves.easeInOutSine
+  final Curve animationCurve;
+
+  /// If enabled, the last items in the collection will appear on the screen.
+  /// User can scroll to the left.
+  /// Default false
+  final bool reverse;
+
+  /// Height of the footer. Can be 0 when no labels shown.
+  /// Default 16
   final double footerHeight;
+
+  /// Height of the top's icon.
+  /// Default 16
   final double iconHeight;
+
+  /// Height of the top's value text.
+  /// Values are displayed using textTheme.caption style
+  /// Default 16
   final double headerValueHeight;
+
+  /// Grid's lines color.
+  /// Default from theme.
   final Color lineGridColor;
 
   BarChart(
@@ -34,7 +78,7 @@ class BarChart extends StatelessWidget {
       this.getColor,
       this.getIcon,
       this.barWidth = 32,
-      this.barSeparation = 10,
+      this.barSeparation = 12,
       @required this.animationDuration,
       this.itemRadius = 10,
       this.footerHeight = 32,
@@ -55,9 +99,9 @@ class BarChart extends StatelessWidget {
 
     bool showLabels = !(labels.length == 0);
 
-    int maxValue = _getMaxData();
+    double maxValue = wasEmpty ? 1 : _getMaxData();
     return CustomMultiChildLayout(
-      delegate: FollowTheGridLines(
+      delegate: _FollowTheGridLines(
         header: this.headerValueHeight + this.iconHeight,
         footer: this.footerHeight,
       ),
@@ -98,7 +142,6 @@ class BarChart extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               return _getBarItem(
-                  context,
                   reverse ? (index - data.length + 1) * -1 : index,
                   wasEmpty,
                   showLabels,
@@ -116,13 +159,12 @@ class BarChart extends StatelessWidget {
   }
 
   Widget _getBarItem(
-    BuildContext context,
     int index,
     bool hideValue,
     bool showLabels,
-    int maxValue,
+    double maxValue,
   ) {
-    return BarItem(
+    return _BarItem(
       width: barWidth,
       value: data[index],
       label: labels.length > index ? labels[index] : null,
@@ -147,8 +189,8 @@ class BarChart extends StatelessWidget {
     }
   }
 
-  int _getMaxData() {
-    int max = 1;
+  double _getMaxData() {
+    double max = 0.0;
     for (var num in data) {
       if (num > max) max = num;
     }
@@ -156,11 +198,125 @@ class BarChart extends StatelessWidget {
   }
 }
 
-class FollowTheGridLines extends MultiChildLayoutDelegate {
+class _BarItem extends ImplicitlyAnimatedWidget {
+  final BarCharGetColor getColor;
+  final BarCharGetIcon getIcon;
+  final double heightFactor;
+  final double width;
+  final double value;
+  final String label;
+  final bool showLabels;
+  final bool hideValue;
+  final bool dislplayValue;
+  final double radius;
+  final double footerHeight;
+  final double iconHeight;
+  final double headerValueHeight;
+
+  const _BarItem({
+    Key key,
+    @required this.heightFactor,
+    @required this.width,
+    @required this.value,
+    this.label,
+    this.showLabels,
+    this.dislplayValue = true,
+    this.hideValue = false,
+    @required this.getColor,
+    this.getIcon,
+    Curve curve = Curves.linear,
+    @required Duration duration,
+    this.radius = 10,
+    this.footerHeight = 32,
+    this.iconHeight = 16,
+    this.headerValueHeight = 16,
+  })  : assert(heightFactor != null),
+        assert(width != null),
+        assert(value != null),
+        assert(getColor != null),
+        assert(duration != null),
+        super(
+          key: key,
+          duration: duration,
+          curve: curve,
+        );
+
+  @override
+  _BarItemState createState() => _BarItemState();
+}
+
+class _BarItemState extends AnimatedWidgetBaseState<_BarItem> {
+  Tween<double> _transform;
+
+  @override
+  void forEachTween(visitor) {
+    _transform = visitor(_transform, widget.heightFactor,
+        (dynamic value) => Tween<double>(begin: value));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: <Widget>[
+        SizedBox(
+          height: widget.iconHeight,
+          width: widget.width,
+          child: widget.getIcon == null || widget.hideValue
+              ? null
+              : widget.getIcon(widget.value),
+        ),
+        SizedBox(
+          height: widget.headerValueHeight,
+          width: widget.width,
+          child: Text(
+            widget.hideValue || !widget.dislplayValue
+                ? ''
+                : widget.value.toString(),
+            textAlign: TextAlign.center,
+            softWrap: false,
+            style: Theme.of(context).textTheme.caption,
+          ),
+        ),
+        Flexible(
+          flex: 10,
+          child: FractionallySizedBox(
+            alignment: Alignment.bottomCenter,
+            heightFactor: _transform.evaluate(animation),
+            child: Container(
+              width: widget.width,
+              decoration: BoxDecoration(
+                color: widget.getColor == null
+                    ? Theme.of(context).primaryColor
+                    : widget.getColor(widget.value),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(widget.radius),
+                  topRight: Radius.circular(widget.radius),
+                ),
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          width: widget.width,
+          height: widget.footerHeight,
+          child: Text(
+            widget.label == null ? '' : widget.label,
+            softWrap: false,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.subhead,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _FollowTheGridLines extends MultiChildLayoutDelegate {
   final double header;
   final double footer;
 
-  FollowTheGridLines({this.header, this.footer}) : super();
+  _FollowTheGridLines({this.header, this.footer}) : super();
 
   @override
   void performLayout(Size size) {
