@@ -1,5 +1,4 @@
 import 'package:example/bar_chart_page.dart';
-import 'package:example/calendar_grid_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -9,43 +8,42 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Test charts'),
+        title: Text('Charts example'),
       ),
       body: Container(
+        margin: EdgeInsets.only(top: 32),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Charts',
-              style: Theme.of(context).textTheme.display1,
+            Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: 32,
+              ),
+              child: Text(
+                'Bar Chart + Calendar Grid',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.display1,
+              ),
             ),
-            ButtonBar(
-              alignment: MainAxisAlignment.center,
-              children: <Widget>[
-                RaisedButton(
-                  child: Text('Bar chart'),
-                  onPressed: () {
-                    Navigator.pushNamed(context, BarChartPage.ID);
-                  },
-                )
-              ],
+            SizedBox(
+              height: 16,
             ),
+            Container(
+                margin: EdgeInsets.symmetric(horizontal: 32),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: RaisedButton(
+                    color: Theme.of(context).primaryColor,
+                    child: Text(
+                      'Bar chart',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, BarChartPage.ID);
+                    },
+                  ),
+                )),
             Divider(),
-            Text(
-              'Calendar grid',
-              style: Theme.of(context).textTheme.display1,
-            ),
-            ButtonBar(
-              alignment: MainAxisAlignment.center,
-              children: <Widget>[
-                RaisedButton(
-                  child: Text('Calendar grid'),
-                  onPressed: () {
-                    Navigator.pushNamed(context, CalendarGridPage.ID);
-                  },
-                )
-              ],
-            ),
           ],
         ),
       ),

@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:chart_components/calendar_grid_component.dart';
 import 'package:flutter/material.dart';
 import 'data_repository.dart';
 import 'package:chart_components/bar_chart_component.dart';
@@ -40,7 +41,35 @@ class _BarChartPageState extends State<BarChartPage> {
               ),
             ),
             Expanded(
-              flex: 20,
+              flex: 25,
+              child: Center(
+                child: Container(
+                  margin: EdgeInsets.symmetric(vertical: 16, horizontal: 64),
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).buttonColor,
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  child: Column(
+                    children: <Widget>[
+                      Text(
+                        'January',
+                        style: Theme.of(context).textTheme.title,
+                      ),
+                      CalendarGrid(
+                        year: 2020,
+                        month: 1,
+                        getColorOfDay: DataRepository.getDayColor,
+                        animationDuration: Duration(milliseconds: 1500),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 30,
               child: Container(
                 margin: EdgeInsets.all(16),
                 padding: EdgeInsets.only(bottom: 0, left: 8, right: 8, top: 8),
@@ -72,7 +101,7 @@ class _BarChartPageState extends State<BarChartPage> {
             Expanded(
               flex: 1,
               child: SizedBox(
-                height: 16,
+                height: 8,
               ),
             ),
             FractionallySizedBox(
@@ -89,7 +118,7 @@ class _BarChartPageState extends State<BarChartPage> {
             Expanded(
               flex: 1,
               child: SizedBox(
-                height: 16,
+                height: 8,
               ),
             ),
           ],
