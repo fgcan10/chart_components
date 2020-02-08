@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class DataRepository {
-  static List<double> data = [
+  static List<double> data = [];
+  static List<double> _data = [
     2.2,
     0.7,
     1.4,
@@ -31,7 +32,12 @@ class DataRepository {
   ];
 
   static List<double> getData() {
-    return data;
+    data = _data;
+    return _data;
+  }
+
+  static void clearData() {
+    data = [];
   }
 
   static List<String> getLabels() {
@@ -89,7 +95,7 @@ class DataRepository {
     if (day < data.length) {
       return getColor(data[day]);
     } else
-      return Colors.indigo.shade100;
+      return Colors.indigo.shade50;
   }
 
   static Icon getIcon(double value) {

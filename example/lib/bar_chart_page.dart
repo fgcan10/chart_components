@@ -12,16 +12,9 @@ class BarChartPage extends StatefulWidget {
 }
 
 class _BarChartPageState extends State<BarChartPage> {
-  List<double> emptyData = [];
-  List<double> data;
+  List<double> data = [];
   List<String> labels = [];
   bool loaded = false;
-
-  @override
-  void initState() {
-    super.initState();
-    data = emptyData;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,18 +83,7 @@ class _BarChartPageState extends State<BarChartPage> {
                   'Refresh data',
                   style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
-                onPressed: () {
-                  setState(() {
-                    if (!loaded) {
-                      data = DataRepository.getData();
-                      loaded = true;
-                    } else {
-                      data[data.length - 1] =
-                          (Random().nextDouble() * 700).round() / 100;
-                    }
-                    labels = DataRepository.getLabels();
-                  });
-                },
+                onPressed: _loadData,
               ),
             ),
             Expanded(
@@ -114,5 +96,17 @@ class _BarChartPageState extends State<BarChartPage> {
         ),
       ),
     );
+  }
+
+  void _loadData() {
+    setState(() {
+      if (!loaded) {
+        data = DataRepository.getData();
+        loaded = true;
+      } else {
+        data[data.length - 1] = (Random().nextDouble() * 700).round() / 100;
+      }
+      labels = DataRepository.getLabels();
+    });
   }
 }

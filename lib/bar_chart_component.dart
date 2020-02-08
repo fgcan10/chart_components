@@ -333,13 +333,11 @@ class _FollowTheGridLines extends MultiChildLayoutDelegate {
   @override
   void performLayout(Size size) {
     Size leaderSize = Size.zero;
-    print('size ' + size.height.toString());
 
     if (hasChild(_Slot.chart)) {
       leaderSize = layoutChild(_Slot.chart, BoxConstraints.loose(size));
       positionChild(_Slot.chart, Offset.zero);
     }
-    print('leader size ' + leaderSize.height.toString());
 
     Size dividerSize = Size(leaderSize.width, 1.0);
     double gridBottom = leaderSize.height - footer;
