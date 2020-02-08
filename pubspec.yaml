@@ -1,8 +1,8 @@
 name: chart_components
 description: Diverse chart components for Flutter.
-version: 0.0.1
+version: 0.0.2
 author: Fernando Paredes Quesada<fgcan10@gmail.com>
-homepage: 
+homepage: https://github.com/fgcan10/chart_components
 
 environment:
   sdk: ">=2.2.2 <3.0.0"
