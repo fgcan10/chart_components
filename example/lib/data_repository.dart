@@ -23,8 +23,8 @@ class DataRepository {
     2.2,
     3.2,
     4.5,
-    1.8,
-    2.0,
+    0.7,
+    1.9,
     3.8,
     4.1,
     1.3,
@@ -95,19 +95,19 @@ class DataRepository {
   static Icon getIcon(double value) {
     if (value < 1) {
       return Icon(
-        Icons.sentiment_dissatisfied,
+        Icons.star_border,
         size: 24,
         color: getColor(value),
       );
     } else if (value < 2) {
       return Icon(
-        Icons.sentiment_satisfied,
+        Icons.star_half,
         size: 24,
         color: getColor(value),
       );
     } else
       return Icon(
-        Icons.sentiment_very_satisfied,
+        Icons.star,
         size: 24,
         color: getColor(value),
       );
