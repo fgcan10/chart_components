@@ -5,3 +5,7 @@
 ## [0.0.2] - 2020-02-08
 
 * An animated calendar grid for Flutter. Easy to implement and customize.
+
+## [0.1.1] - 2020-02-09
+
+* First version on pub.
