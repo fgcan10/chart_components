@@ -9,3 +9,7 @@
 ## [0.1.1] - 2020-02-09
 
 * First version on pub.
+
+## [0.1.2] - 2020-02-09
+
+* Follow pub packages description guidelines.
