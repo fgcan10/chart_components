@@ -107,7 +107,7 @@ class CalendarGrid extends StatelessWidget {
       if (newDay.day <= maxday && newDay.month == month) {
         ret.add(Container(
           child: _getDayGridItem(newDay, context),
-          color: (i > 5) ? backgroundColorWeekend : null,
+          color: _isWeekend(i) ? backgroundColorWeekend : null,
         ));
       } else {
         ret.add(_getEmtpyGridItem());
@@ -115,6 +115,15 @@ class CalendarGrid extends StatelessWidget {
       newDay = newDay.add(const Duration(days: 1));
     }
     return ret;
+  }
+
+  bool _isWeekend(int dayOfWeek) {
+    DateTime moonlanding = DateTime(1969, 7, 20);
+    if (moonlanding.weekday == 7) {
+      return (dayOfWeek > 5);
+    } else {
+      return (dayOfWeek == 1 || dayOfWeek == 7);
+    }
   }
 
   int _lastDayOfTheMonth() {

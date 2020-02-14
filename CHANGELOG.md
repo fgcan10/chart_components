@@ -13,3 +13,7 @@
 ## [0.1.2] - 2020-02-09
 
 * Follow pub packages description guidelines.
+
+## [0.1.3] - 2020-02-14
+
+* Extra grid line on top.

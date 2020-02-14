@@ -1,7 +1,29 @@
 # Chart_Components
 
-* Animated bar chart for Flutter. Easy to implement and customize.
-* Animated calendar grid for Flutter. 
+## Animated bar chart for Flutter ##
+
+Customizable bar chart for Flutter.
+The component calculates min and max of data and resizes bars as needed.
+
+(https://github.com/fgcan10/chart_components/raw/master/bar_chart.gif)
+
+* Add a data collection with the values to generate the bars.
+* Add a string collection with the labels to display below the items (optional)
+* Change bar size, margins and top corners as needed.
+* Change bar's color based on value. Callback, optional.
+* Enable/disable value on top of bar
+* Add an icon to the top of the bar based on item's value. Callback, optiona.
+* Enable/disable animation.
+* Change animation duration and curve through the properties 
+
+## Animated calendar grid for Flutter ##
+
+(https://github.com/fgcan10/chart_components/raw/master/calendargrid.gif)
+
+* Generates a grid for the selected month.
+* Changes day color through callback. 
+* Animates changes. Animation curve and duration can be modified with the properties.
+
 
 ## Demo
 ![Demo: ](https://github.com/fgcan10/chart_components/raw/master/barchart_calendargrid.gif)

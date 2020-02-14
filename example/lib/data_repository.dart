@@ -42,7 +42,6 @@ class DataRepository {
 
   static List<String> getLabels() {
     List<String> labels = [
-      'mo',
       'tu',
       'we',
       'th',
