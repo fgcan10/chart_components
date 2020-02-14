@@ -18,6 +18,12 @@ class _BarChartPageState extends State<BarChartPage> {
   bool loaded = false;
 
   @override
+  void initState() {
+    super.initState();
+    DataRepository.clearData();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
