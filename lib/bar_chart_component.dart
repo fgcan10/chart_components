@@ -6,6 +6,7 @@ enum _Slot {
   divider14,
   divider24,
   divider34,
+  divider44,
 }
 
 typedef BarCharGetColor = Color Function(double value);
@@ -134,6 +135,13 @@ class BarChart extends StatelessWidget {
         ),
         LayoutId(
           id: _Slot.divider34,
+          child: Divider(
+            color: lineGridColor,
+            thickness: 0.8,
+          ),
+        ),
+        LayoutId(
+          id: _Slot.divider44,
           child: Divider(
             color: lineGridColor,
             thickness: 0.8,
@@ -364,6 +372,12 @@ class _FollowTheGridLines extends MultiChildLayoutDelegate {
       layoutChild(_Slot.divider34, BoxConstraints.tight(dividerSize));
       positionChild(_Slot.divider34,
           Offset(0, gridBottom - ((gridBottom - gridTop) * 3 / 4)));
+    }
+
+    if (hasChild(_Slot.divider44)) {
+      layoutChild(_Slot.divider44, BoxConstraints.tight(dividerSize));
+      positionChild(
+          _Slot.divider44, Offset(0, gridBottom - (gridBottom - gridTop)));
     }
   }
 

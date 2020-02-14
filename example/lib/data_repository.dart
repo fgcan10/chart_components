@@ -84,11 +84,11 @@ class DataRepository {
 
   static Color getColor(double value) {
     if (value < 2) {
-      return Colors.indigo.shade100;
+      return Colors.amber.shade300;
     } else if (value < 4) {
-      return Colors.indigo.shade500;
+      return Colors.amber.shade600;
     } else
-      return Colors.indigo.shade900;
+      return Colors.amber.shade900;
   }
 
   static Color getDayColor(int day) {
