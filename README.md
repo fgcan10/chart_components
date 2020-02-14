@@ -5,7 +5,7 @@
 Customizable bar chart for Flutter.
 The component calculates min and max of data and resizes bars as needed.
 
-(https://github.com/fgcan10/chart_components/raw/master/bar_chart.gif)
+![bar chart](https://github.com/fgcan10/chart_components/raw/master/bar_chart.gif)
 
 * Add a data collection with the values to generate the bars.
 * Add a string collection with the labels to display below the items (optional)
@@ -18,7 +18,7 @@ The component calculates min and max of data and resizes bars as needed.
 
 ## Animated calendar grid for Flutter ##
 
-(https://github.com/fgcan10/chart_components/raw/master/calendargrid.gif)
+![calendar grid](https://github.com/fgcan10/chart_components/raw/master/calendargrid.gif)
 
 * Generates a grid for the selected month.
 * Changes day color through callback. 
