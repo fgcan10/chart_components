@@ -18,7 +18,7 @@ The component calculates min and max of data and resizes bars as needed.
 
 ## Animated calendar grid for Flutter ##
 
-![calendar grid](https://github.com/fgcan10/chart_components/raw/master/calendargrid.gif)
+![calendar grid](https://github.com/fgcan10/chart_components/raw/master/calendar_grid.gif)
 
 * Generates a grid for the selected month.
 * Changes day color through callback. 
