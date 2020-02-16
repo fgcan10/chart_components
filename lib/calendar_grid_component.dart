@@ -107,7 +107,9 @@ class CalendarGrid extends StatelessWidget {
       if (newDay.day <= maxday && newDay.month == month) {
         ret.add(Container(
           child: _getDayGridItem(newDay, context),
-          color: _isWeekend(i) ? backgroundColorWeekend : null,
+          decoration: BoxDecoration(
+              color: _isWeekend(i) ? backgroundColorWeekend : null,
+              border: Border.all(width: 0, color: Color(0x00FFFFFF))),
         ));
       } else {
         ret.add(_getEmtpyGridItem());

@@ -22,7 +22,7 @@ class BarChart extends StatelessWidget {
   final List<String> labels;
 
   /// If enabled isplays the value on top of the bar.
-  final bool dislplayValue;
+  final bool displayValue;
 
   /// Gets the color of the bar based on the bar value.
   final BarCharGetColor getColor;
@@ -79,7 +79,7 @@ class BarChart extends StatelessWidget {
       {this.labels = const [],
       @required this.data,
       this.reverse = false,
-      this.dislplayValue = true,
+      this.displayValue = true,
       this.getColor,
       this.getIcon,
       this.barWidth = 32,
@@ -157,6 +157,7 @@ class BarChart extends StatelessWidget {
               return _getBarItem(
                   reverse ? (index - data.length + 1) * -1 : index,
                   wasEmpty,
+                  displayValue,
                   showLabels,
                   maxValue);
             },
@@ -174,6 +175,7 @@ class BarChart extends StatelessWidget {
   Widget _getBarItem(
     int index,
     bool hideValue,
+    bool displayValue,
     bool showLabels,
     double maxValue,
   ) {
@@ -192,6 +194,7 @@ class BarChart extends StatelessWidget {
       roundValuesOnText: roundValuesOnText,
       iconHeight: iconHeight,
       headerValueHeight: headerValueHeight,
+      dislplayValue: displayValue,
     );
   }
 

@@ -37,20 +37,17 @@ class _BarChartPageState extends State<BarChartPage> {
               margin: EdgeInsets.only(top: 16),
               child: Text(
                 'Walked km per day',
-                style: Theme.of(context).textTheme.display1,
+                style: Theme.of(context).textTheme.title,
               ),
             ),
-            Expanded(
-              flex: 1,
-              child: SizedBox(
-                height: 16,
-              ),
+            SizedBox(
+              height: 8,
             ),
             Expanded(
               flex: 25,
               child: Center(
                 child: Container(
-                  margin: EdgeInsets.symmetric(vertical: 16, horizontal: 64),
+                  margin: EdgeInsets.symmetric(horizontal: 64),
                   padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Theme.of(context).buttonColor,
@@ -87,7 +84,7 @@ class _BarChartPageState extends State<BarChartPage> {
                 child: BarChart(
                   data: data,
                   labels: labels,
-                  dislplayValue: true,
+                  displayValue: true,
                   reverse: true,
                   getColor: DataRepository.getColor,
                   getIcon: DataRepository.getIcon,
@@ -104,12 +101,6 @@ class _BarChartPageState extends State<BarChartPage> {
                 ),
               ),
             ),
-            Expanded(
-              flex: 1,
-              child: SizedBox(
-                height: 8,
-              ),
-            ),
             FractionallySizedBox(
               widthFactor: 0.9,
               child: RaisedButton(
@@ -121,11 +112,8 @@ class _BarChartPageState extends State<BarChartPage> {
                 onPressed: _loadData,
               ),
             ),
-            Expanded(
-              flex: 1,
-              child: SizedBox(
-                height: 8,
-              ),
+            SizedBox(
+              height: 8,
             ),
           ],
         ),

@@ -17,3 +17,7 @@
 ## [0.1.3] - 2020-02-14
 
 * Extra grid line on top.
+
+## [0.1.4] - 2020-02-16
+
+* White horizontal line in weekend background deleted.
