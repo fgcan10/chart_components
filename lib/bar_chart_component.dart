@@ -21,13 +21,14 @@ class BarChart extends StatelessWidget {
   /// Labels to display under the bars.
   final List<String> labels;
 
-  /// Label style
+  /// Label style. If not provided TextTheme.subtitle1 will be used
   final TextStyle labelStyle;
 
   /// If enabled isplays the value on top of the bar.
   final bool displayValue;
 
   /// Textstyle of displayed value
+  /// If not provided textTheme.caption style will be used
   final TextStyle valueStyle;
 
   /// Gets the color of the bar based on the bar value.
@@ -69,7 +70,6 @@ class BarChart extends StatelessWidget {
   final double iconHeight;
 
   /// Height of the top's value text.
-  /// Values are displayed using textTheme.caption style
   /// Default 16
   final double headerValueHeight;
 
