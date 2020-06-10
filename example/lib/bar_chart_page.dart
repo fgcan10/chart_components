@@ -84,6 +84,9 @@ class _BarChartPageState extends State<BarChartPage> {
                 child: BarChart(
                   data: data,
                   labels: labels,
+                  labelStyle: TextStyle(fontSize: 18),
+                  valueStyle:
+                      TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                   displayValue: true,
                   reverse: true,
                   getColor: DataRepository.getColor,

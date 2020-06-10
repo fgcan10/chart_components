@@ -21,8 +21,14 @@ class BarChart extends StatelessWidget {
   /// Labels to display under the bars.
   final List<String> labels;
 
+  /// Label style
+  final TextStyle labelStyle;
+
   /// If enabled isplays the value on top of the bar.
   final bool displayValue;
+
+  /// Textstyle of displayed value
+  final TextStyle valueStyle;
 
   /// Gets the color of the bar based on the bar value.
   final BarCharGetColor getColor;
@@ -77,9 +83,11 @@ class BarChart extends StatelessWidget {
 
   BarChart(
       {this.labels = const [],
+      this.labelStyle,
       @required this.data,
       this.reverse = false,
       this.displayValue = true,
+      this.valueStyle,
       this.getColor,
       this.getIcon,
       this.barWidth = 32,
@@ -182,7 +190,9 @@ class BarChart extends StatelessWidget {
     return _BarItem(
       width: barWidth,
       value: data[index],
+      valueStyle: valueStyle,
       label: labels.length > index ? labels[index] : null,
+      labelStyle: labelStyle,
       showLabels: showLabels,
       heightFactor: data[index] / maxValue,
       duration: animationDuration,
@@ -223,7 +233,9 @@ class _BarItem extends ImplicitlyAnimatedWidget {
   final double heightFactor;
   final double width;
   final double value;
+  final TextStyle valueStyle;
   final String label;
+  final TextStyle labelStyle;
   final bool showLabels;
   final bool hideValue;
   final bool dislplayValue;
@@ -238,7 +250,9 @@ class _BarItem extends ImplicitlyAnimatedWidget {
     @required this.heightFactor,
     @required this.width,
     @required this.value,
+    this.valueStyle,
     this.label,
+    this.labelStyle,
     this.showLabels,
     this.dislplayValue = true,
     this.hideValue = false,
@@ -298,7 +312,7 @@ class _BarItemState extends AnimatedWidgetBaseState<_BarItem> {
                     : widget.value.toString()),
             textAlign: TextAlign.center,
             softWrap: false,
-            style: Theme.of(context).textTheme.caption,
+            style: widget.valueStyle ?? Theme.of(context).textTheme.caption,
           ),
         ),
         Flexible(
@@ -327,7 +341,7 @@ class _BarItemState extends AnimatedWidgetBaseState<_BarItem> {
             widget.label == null ? '' : widget.label,
             softWrap: false,
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.subhead,
+            style: widget.labelStyle ?? Theme.of(context).textTheme.subtitle1,
           ),
         ),
       ],
