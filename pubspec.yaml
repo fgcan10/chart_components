@@ -1,6 +1,6 @@
 name: chart_components
 description: Two chart components for Flutter. Animated bar chart and animated calendar grid chart based on the github's one. Many properties to customize.
-version: 0.1.5
+version: 0.1.6
 authors: 
   - Fernando Paredes Quesada<fgcan10@gmail.com>
 homepage: https://github.com/fgcan10/chart_components

@@ -194,7 +194,7 @@ class BarChart extends StatelessWidget {
       label: labels.length > index ? labels[index] : null,
       labelStyle: labelStyle,
       showLabels: showLabels,
-      heightFactor: data[index] / maxValue,
+      heightFactor: data[index] / (maxValue == 0 ? 1 : maxValue),
       duration: animationDuration,
       getColor: getColor,
       getIcon: getIcon,
@@ -291,6 +291,7 @@ class _BarItemState extends AnimatedWidgetBaseState<_BarItem> {
 
   @override
   Widget build(BuildContext context) {
+    double hf = _transform.evaluate(animation);
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
@@ -319,7 +320,7 @@ class _BarItemState extends AnimatedWidgetBaseState<_BarItem> {
           flex: 10,
           child: FractionallySizedBox(
             alignment: Alignment.bottomCenter,
-            heightFactor: _transform.evaluate(animation),
+            heightFactor: hf,
             child: Container(
               width: widget.width,
               decoration: BoxDecoration(

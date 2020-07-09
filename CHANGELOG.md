@@ -25,3 +25,7 @@
 ## [0.1.5] - 2020-06-10
 
 * Properties valueStyle and labelStyle added to allow custom styles.
+
+## [0.1.6] - 2020-07-09
+
+* Solved issue 6. Returns an Exception when all the values get zero in data 
