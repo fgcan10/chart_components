@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
               child: Text(
                 'Bar Chart + Calendar Grid',
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.display1,
+                style: Theme.of(context).textTheme.headline5,
               ),
             ),
             SizedBox(
@@ -32,8 +32,7 @@ class HomePage extends StatelessWidget {
                 margin: EdgeInsets.symmetric(horizontal: 32),
                 child: SizedBox(
                   width: double.infinity,
-                  child: RaisedButton(
-                    color: Theme.of(context).primaryColor,
+                  child: ElevatedButton(
                     child: Text(
                       'Bar chart',
                       style: TextStyle(color: Colors.white, fontSize: 18),

@@ -37,7 +37,7 @@ class _BarChartPageState extends State<BarChartPage> {
               margin: EdgeInsets.only(top: 16),
               child: Text(
                 'Walked km per day',
-                style: Theme.of(context).textTheme.title,
+                style: Theme.of(context).textTheme.headline5,
               ),
             ),
             SizedBox(
@@ -106,8 +106,7 @@ class _BarChartPageState extends State<BarChartPage> {
             ),
             FractionallySizedBox(
               widthFactor: 0.9,
-              child: RaisedButton(
-                color: Theme.of(context).primaryColor,
+              child: ElevatedButton(
                 child: Text(
                   'Refresh data',
                   style: TextStyle(color: Colors.white, fontSize: 18),
