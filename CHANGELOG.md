@@ -29,3 +29,7 @@
 ## [0.1.6] - 2020-07-09
 
 * Solved issue 6. Returns an Exception when all the values get zero in data 
+
+## [1.0.1] - 2021-04-04
+
+* Null-safety

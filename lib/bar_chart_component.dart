@@ -22,20 +22,20 @@ class BarChart extends StatelessWidget {
   final List<String> labels;
 
   /// Label style. If not provided TextTheme.subtitle1 will be used
-  final TextStyle labelStyle;
+  final TextStyle? labelStyle;
 
   /// If enabled isplays the value on top of the bar.
   final bool displayValue;
 
   /// Textstyle of displayed value
   /// If not provided textTheme.caption style will be used
-  final TextStyle valueStyle;
+  final TextStyle? valueStyle;
 
   /// Gets the color of the bar based on the bar value.
   final BarCharGetColor getColor;
 
   /// Gets the icon to be displayed on top based on the bar value.
-  final BarCharGetIcon getIcon;
+  final BarCharGetIcon? getIcon;
 
   /// Radius for the top of the bar.
   /// Default 10
@@ -75,7 +75,7 @@ class BarChart extends StatelessWidget {
 
   /// Grid's lines color.
   /// Default from theme.
-  final Color lineGridColor;
+  final Color? lineGridColor;
 
   /// Int labels.
   /// Default false.
@@ -84,24 +84,22 @@ class BarChart extends StatelessWidget {
   BarChart(
       {this.labels = const [],
       this.labelStyle,
-      @required this.data,
+      required this.data,
       this.reverse = false,
       this.displayValue = true,
       this.valueStyle,
-      this.getColor,
+      required this.getColor,
       this.getIcon,
       this.barWidth = 32,
       this.barSeparation = 12,
-      @required this.animationDuration,
+      required this.animationDuration,
       this.itemRadius = 10,
       this.footerHeight = 32,
       this.iconHeight = 0,
       this.headerValueHeight = 16,
       this.lineGridColor,
       this.roundValuesOnText = false,
-      this.animationCurve = Curves.easeInOutSine})
-      : assert(data != null),
-        assert(animationDuration != null);
+      this.animationCurve = Curves.easeInOutSine});
 
   @override
   Widget build(BuildContext context) {
@@ -229,14 +227,14 @@ class BarChart extends StatelessWidget {
 
 class _BarItem extends ImplicitlyAnimatedWidget {
   final BarCharGetColor getColor;
-  final BarCharGetIcon getIcon;
+  final BarCharGetIcon? getIcon;
   final double heightFactor;
   final double width;
   final double value;
-  final TextStyle valueStyle;
-  final String label;
-  final TextStyle labelStyle;
-  final bool showLabels;
+  final TextStyle? valueStyle;
+  final String? label;
+  final TextStyle? labelStyle;
+  final bool? showLabels;
   final bool hideValue;
   final bool dislplayValue;
   final double radius;
@@ -246,31 +244,26 @@ class _BarItem extends ImplicitlyAnimatedWidget {
   final bool roundValuesOnText;
 
   const _BarItem({
-    Key key,
-    @required this.heightFactor,
-    @required this.width,
-    @required this.value,
+    Key? key,
+    required this.heightFactor,
+    required this.width,
+    required this.value,
     this.valueStyle,
     this.label,
     this.labelStyle,
     this.showLabels,
     this.dislplayValue = true,
     this.hideValue = false,
-    @required this.getColor,
+    required this.getColor,
     this.getIcon,
     Curve curve = Curves.linear,
-    @required Duration duration,
+    required Duration duration,
     this.radius = 10,
     this.footerHeight = 32,
     this.iconHeight = 16,
     this.roundValuesOnText = false,
     this.headerValueHeight = 16,
-  })  : assert(heightFactor != null),
-        assert(width != null),
-        assert(value != null),
-        assert(getColor != null),
-        assert(duration != null),
-        super(
+  }) : super(
           key: key,
           duration: duration,
           curve: curve,
@@ -281,17 +274,17 @@ class _BarItem extends ImplicitlyAnimatedWidget {
 }
 
 class _BarItemState extends AnimatedWidgetBaseState<_BarItem> {
-  Tween<double> _transform;
+  Tween<double>? _transform;
 
   @override
   void forEachTween(visitor) {
     _transform = visitor(_transform, widget.heightFactor,
-        (dynamic value) => Tween<double>(begin: value));
+        (dynamic value) => Tween<double>(begin: value)) as Tween<double>;
   }
 
   @override
   Widget build(BuildContext context) {
-    double hf = _transform.evaluate(animation);
+    double? hf = _transform?.evaluate(animation);
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
@@ -300,7 +293,7 @@ class _BarItemState extends AnimatedWidgetBaseState<_BarItem> {
           width: widget.width,
           child: widget.getIcon == null || widget.hideValue
               ? null
-              : widget.getIcon(widget.value),
+              : widget.getIcon!(widget.value),
         ),
         SizedBox(
           height: widget.headerValueHeight,
@@ -324,9 +317,7 @@ class _BarItemState extends AnimatedWidgetBaseState<_BarItem> {
             child: Container(
               width: widget.width,
               decoration: BoxDecoration(
-                color: widget.getColor == null
-                    ? Theme.of(context).primaryColor
-                    : widget.getColor(widget.value),
+                color: widget.getColor(widget.value),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(widget.radius),
                   topRight: Radius.circular(widget.radius),
@@ -339,7 +330,7 @@ class _BarItemState extends AnimatedWidgetBaseState<_BarItem> {
           width: widget.width,
           height: widget.footerHeight,
           child: Text(
-            widget.label == null ? '' : widget.label,
+            widget.label == null ? '' : widget.label!,
             softWrap: false,
             textAlign: TextAlign.center,
             style: widget.labelStyle ?? Theme.of(context).textTheme.subtitle1,
@@ -354,7 +345,7 @@ class _FollowTheGridLines extends MultiChildLayoutDelegate {
   final double header;
   final double footer;
 
-  _FollowTheGridLines({this.header, this.footer}) : super();
+  _FollowTheGridLines({required this.header, required this.footer}) : super();
 
   @override
   void performLayout(Size size) {

@@ -35,19 +35,16 @@ class CalendarGrid extends StatelessWidget {
   final Curve animationCurve;
 
   CalendarGrid({
-    @required this.year,
-    @required this.month,
+    required this.year,
+    required this.month,
     this.dayItemSize = 16.0,
     this.boderRadiusItem = 2.0,
     this.marginItem = 4.0,
     this.backgroundColorWeekend = Colors.grey,
-    @required this.animationDuration,
+    required this.animationDuration,
     this.animationCurve = Curves.linear,
-    @required this.getColorOfDay,
-  })  : assert(year != null),
-        assert(month != null),
-        assert(getColorOfDay != null),
-        assert(animationDuration != null);
+    required this.getColorOfDay,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -143,9 +140,7 @@ class CalendarGrid extends StatelessWidget {
       width: dayItemSize,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(boderRadiusItem),
-        color: getColorOfDay == null
-            ? Theme.of(context).primaryColor
-            : getColorOfDay(newDay.day),
+        color: getColorOfDay(newDay.day),
       ),
     );
   }
