@@ -58,7 +58,7 @@ class _BarChartPageState extends State<BarChartPage> {
                     children: <Widget>[
                       Text(
                         'January',
-                        style: Theme.of(context).textTheme.title,
+                        style: Theme.of(context).textTheme.headline5,
                       ),
                       CalendarGrid(
                         year: 2020,
